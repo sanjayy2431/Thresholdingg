@@ -2,6 +2,7 @@
 
 ## Developed by : SANJAY V
 ## Register No: 212223230188
+## Date :30/10/25
 ## Aim
 To segment the image using global thresholding, adaptive thresholding and Otsu's thresholding using python and OpenCV.
 
