@@ -1,9 +1,10 @@
-
-## Aim
-To segment the image using global thresholding, adaptive thresholding and Otsu's thresholding using python and OpenCV.
+## Thresholdingg
 ## Name : SANJAY V
 ## Reg No : 212223230188
 ## Date : 3/11/25
+
+## Aim
+To segment the image using global thresholding, adaptive thresholding and Otsu's thresholding using python and OpenCV.
 
 ## Software Required
 1. Anaconda - Python 3.7
