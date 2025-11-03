@@ -32,6 +32,8 @@ Use Otsu's method to segment the image and display the results.
 Name : Sanjay V
 Reg no : 212223230188
 
+```
+
 ### Load the necessary packages
 ```py
 import numpy as np
