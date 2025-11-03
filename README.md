@@ -1,10 +1,9 @@
-# THRESHOLDING
 
-## Developed by : SANJAY V
-## Register No: 212223230188
-## Date :30/10/25
 ## Aim
 To segment the image using global thresholding, adaptive thresholding and Otsu's thresholding using python and OpenCV.
+## Name : SANJAY V
+## Reg No : 212223230188
+## Date : 3/11/25
 
 ## Software Required
 1. Anaconda - Python 3.7
@@ -29,85 +28,160 @@ Use Otsu's method to segment the image and display the results.
 
 ## Program
 
-```python
-#Developed by : SANJAY V
-#Register No: 212223230188
-
-# Load the necessary packages
-
-import cv2
+### Load the necessary packages
+```py
 import numpy as np
 import matplotlib.pyplot as plt
+import cv2
+```
+### Read the Image and convert to grayscale
+```py
+image = cv2.imread("disney.jpg",1)
+image = cv2.cvtColor(image,cv2.COLOR_BGR2RGB)
+image_gray = cv2.imread("disney.jpg",0)
+```
+### Use Global thresholding to segment the image
+```py
+ret,thresh_img1=cv2.threshold(image_gray,86,255,cv2.THRESH_BINARY)
+ret,thresh_img2=cv2.threshold(image_gray,86,255,cv2.THRESH_BINARY_INV)
+ret,thresh_img3=cv2.threshold(image_gray,86,255,cv2.THRESH_TOZERO)
+ret,thresh_img4=cv2.threshold(image_gray,86,255,cv2.THRESH_TOZERO_INV)
+ret,thresh_img5=cv2.threshold(image_gray,100,255,cv2.THRESH_TRUNC)
+```
+### Use Adaptive thresholding to segment the image
+```py
+thresh_img7=cv2.adaptiveThreshold(image_gray,255,cv2.ADAPTIVE_THRESH_MEAN_C,cv2.THRESH_BINARY,11,2)
+thresh_img8=cv2.adaptiveThreshold(image_gray,255,cv2.ADAPTIVE_THRESH_GAUSSIAN_C,cv2.THRESH_BINARY,11,2)
+```
+### Use Otsu's method to segment the image 
+```py
+ret,thresh_img6=cv2.threshold(image_gray,0,255,cv2.THRESH_BINARY+cv2.THRESH_OTSU)
+```
+### Display the results
+#### ORIGIONAL IMAGE
+```py
 
 
-
-# Read the Image and convert to grayscale
-image = cv2.imread('dog.png')  # Replace with your image file path
-gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # Convert to grayscale
-plt.subplot(2, 2, 1)
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))  # Convert from BGR to RGB for display
+plt.axis("off")
 plt.title("Original Image")
-plt.axis('off')
-
-
-
-# Use Global thresholding to segment the image
-_, global_thresholded = cv2.threshold(gray_image, 127, 255, cv2.THRESH_BINARY)
-
-
-
-# Use Adaptive thresholding to segment the image
-
-adaptive_thresholded = cv2.adaptiveThreshold(gray_image, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 11, 2)
-
-
-# Use Otsu's method to segment the image 
-
-_, otsu_thresholded = cv2.threshold(gray_image, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
-
-
-# Display the results
-# Global Thresholding
-plt.subplot(2, 2, 2)
-plt.imshow(global_thresholded, cmap='gray')
-plt.title("Global Thresholding")
-plt.axis('off')
-
-# Adaptive Thresholding
-plt.subplot(2, 2, 3)
-plt.imshow(adaptive_thresholded, cmap='gray')
-plt.title("Adaptive Thresholding")
-plt.axis('off')
-
-# Otsu's Method
-plt.subplot(2, 2, 4)
-plt.imshow(otsu_thresholded, cmap='gray')
-plt.title("Otsu's Method")
-plt.axis('off')
-
-# Show the plot
-plt.tight_layout()
-plt.show()
-
+plt.imshow(image)
 
 ```
-## Output
+![image](https://github.com/user-attachments/assets/8dc09b3c-3cc1-4c09-a583-5d3f8aaf3d1c)
 
-### Original Image
-<img width="647" height="260" alt="image" src="https://github.com/user-attachments/assets/4a8a4c88-424f-466f-910a-b4b0993d20fc" />
+#### GREY IMAGE
+```py
 
 
-### Global Thresholding
+plt.axis("off")
+plt.title("Gray Image")
+plt.imshow(cv2.cvtColor(image_gray, cv2.COLOR_BGR2RGB))
+plt.axis("off")
+plt.show()
+```
+![image](https://github.com/user-attachments/assets/dd62748d-a746-4bf5-98d5-deefdcff2b7e)
 
-<img width="314" height="258" alt="image" src="https://github.com/user-attachments/assets/8505c7c2-f8e5-4102-b149-01d6a8166a70" />
+#### Threshold Image (Binary)
+```py
 
-### Adaptive Thresholding
 
-<img width="314" height="270" alt="image" src="https://github.com/user-attachments/assets/8bad6db7-ebd0-4cfb-ad5f-4d776d85a31f" />
+plt.axis("off")
+plt.title("Threshold Image (Binary)")
+plt.imshow(cv2.cvtColor(thresh_img1, cv2.COLOR_BGR2RGB))
+plt.axis("off")
+plt.show()
 
-### Optimum Global Thesholding using Otsu's Method
+```
+![image](https://github.com/user-attachments/assets/e5c88c77-5cc1-4ee3-8328-e028270dfab0)
 
-<img width="305" height="266" alt="image" src="https://github.com/user-attachments/assets/7ebc0333-8385-4272-8433-1f231aaa76c8" />
+
+#### Threshold Image (Binary Inverse)
+```py
+
+
+plt.axis("off")
+plt.title("Threshold Image (Binary Inverse)")
+plt.imshow(cv2.cvtColor(thresh_img2, cv2.COLOR_BGR2RGB))
+plt.axis("off")
+plt.show()
+
+```
+![image](https://github.com/user-attachments/assets/296e1db7-b7d9-4b65-b612-0d95abe591cb)
+
+
+#### Threshold Image (To Zero)
+```py
+
+
+plt.axis("off")
+plt.title("Threshold Image (To Zero)")
+plt.imshow(cv2.cvtColor(thresh_img3, cv2.COLOR_BGR2RGB))
+plt.axis("off")
+plt.show()
+
+```
+![image](https://github.com/user-attachments/assets/62c18fbd-4eeb-42c1-add5-6604f5fc4856)
+
+#### Threshold Image (To Zero-Inverse)
+```py
+
+
+plt.axis("off")
+plt.title("Threshold Image (To Zero-Inverse)")
+plt.imshow(cv2.cvtColor(thresh_img4, cv2.COLOR_BGR2RGB))
+plt.axis("off")
+plt.show()
+
+```
+![image](https://github.com/user-attachments/assets/5f83fb78-7b32-4ac3-93cd-9066eadc13ed)
+
+#### Threshold Image (Truncate)
+```py
+
+plt.axis("off")
+plt.title("Threshold Image (Truncate)")
+plt.imshow(cv2.cvtColor(thresh_img5, cv2.COLOR_BGR2RGB))
+plt.axis("off")
+plt.show()
+
+```
+![image](https://github.com/user-attachments/assets/01a17b9a-040b-4574-857c-1d1fdee5e657)
+
+#### Otsu
+```py
+plt.axis("off")
+plt.title("Otsu")
+plt.imshow(cv2.cvtColor(thresh_img6, cv2.COLOR_BGR2RGB))
+plt.axis("off")
+plt.show()
+
+```
+![image](https://github.com/user-attachments/assets/ce9c7e64-e282-44f7-9f87-4b0aa954be0d)
+
+#### Adaptive Threshold (Mean)
+```py
+
+plt.axis("off")
+plt.title("Adaptive Threshold (Mean)")
+plt.imshow(cv2.cvtColor(thresh_img7, cv2.COLOR_BGR2RGB))
+plt.axis("off")
+plt.show()
+
+```
+![image](https://github.com/user-attachments/assets/98ab8e7b-630c-4b34-abd9-d481eb151f64)
+#### Adaptive Threshold (Gaussian)
+```py
+plt.axis("off")
+plt.title("Adaptive Threshold (Gaussian)")
+plt.imshow(cv2.cvtColor(thresh_img8, cv2.COLOR_BGR2RGB))
+plt.axis("off")
+plt.show()
+
+```
+![image](https://github.com/user-attachments/assets/13d50828-7cc3-48b0-b793-28c4a2b51e7d)
+
+
+
 
 
 ## Result
